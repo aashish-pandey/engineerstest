@@ -1,0 +1,14 @@
+Problem Statement:
+    - This quiz app will serve as a platform to practice for the engineering license exam.
+    - The engineering domains that this platform is supposed to cover are:
+        1. Computer engineering 
+        2. Electrical engineering
+        3. Electronics engineering
+        4. Civil engineering
+Core requirements:
+    - Separate database for each domains
+    - each question will have 4 options
+        - question type can be single option choose or multi option choose
+        - there will be the correct answers
+    - each question will have associated tags
+        - e.g. what concept or what topic does that belong to 

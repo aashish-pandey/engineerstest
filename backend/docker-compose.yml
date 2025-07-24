@@ -1,0 +1,30 @@
+version: '3.8'
+services:
+  db:
+    image: postgres
+    container_name: engineerstest-db
+    environment:
+      POSTGRES_USER: aashish
+      POSTGRES_PASSWORD: supersecret
+      POSTGRES_DB: quizapp
+    ports:
+      - "5432:5432"
+    volumes:
+      - pgdata:/var/lib/postgresql/data
+
+  backend:
+    build: .
+    container_name: engineerstest-api
+    ports:
+      - "3000:3000"
+    depends_on:
+      - db
+    environment:
+      DB_HOST: db
+      DB_PORT: 5432
+      DB_USER: aashish
+      DB_PASS: supersecret
+      DB_NAME: quizapp
+
+volumes:
+  pgdata:

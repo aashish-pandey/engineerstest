@@ -1,0 +1,27 @@
+MVP Development
+
+    1. This version is supposed to support only the engineering license exams
+    2. This version will just have the question and answer format with some corresponding tags
+    3. The db is architected in such a way that it will be easily upgraded to incorporate multiple exams, countries or tests
+
+    
+    ## DB architecture:
+        1. Tables:
+            - questions : stores each quiz question
+            - question_options: stores 4 options per questions, marks the correct ones
+            - tags : master list of all tags (topics, concepts, etc.)
+            - question_tags: mapping table (many-to-many) between questions and tags
+
+    ## going with the aws RDS postgre with followig configuration:
+        db.t4g.micro
+        2vCPUs
+        1 GiB RAM
+        20 GiB
+
+        the main reason for selecting this is the cost:
+        0.019 USD/hour
+
+## THIS IS LOOKING COSTLY
+## Moving to docker and dev. after mvp pushing to aws
+
+##setup postgreSQL in AWS(done)
