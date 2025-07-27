@@ -1,0 +1,11 @@
+1. Request payload to create a question:
+    {
+    "question_text": "What is the capital of France?",
+    "options": [
+        { "text": "Paris", "is_correct": true },
+        { "text": "Madrid", "is_correct": false },
+        { "text": "Rome", "is_correct": false },
+        { "text": "Berlin", "is_correct": false }
+    ],
+    "tags": ["Geography", "Europe"]
+    }

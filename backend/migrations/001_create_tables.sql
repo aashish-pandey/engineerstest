@@ -24,6 +24,7 @@ CREATE TABLE tags(
 
 -- QUESTION_TAGS (JOIN TABLE for MANY-TO-MANY)
 CREATE TABLE question_tags(
-    question_id INTEGER REFERENCES question(id) ON DELETE CASCADE,
+    question_id INTEGER REFERENCES questions(id) ON DELETE CASCADE,
+    tag_id INTEGER REFERENCES tags(id) ON DELETE CASCADE,
     PRIMARY KEY (question_id, tag_id)
 );

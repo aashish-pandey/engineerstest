@@ -1,0 +1,6 @@
+1. get /questions_initial
+
+    json file 
+    {
+
+    }s

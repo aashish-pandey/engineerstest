@@ -25,3 +25,6 @@ MVP Development
 ## Moving to docker and dev. after mvp pushing to aws
 
 ##setup postgreSQL in AWS(done)
+
+
+
