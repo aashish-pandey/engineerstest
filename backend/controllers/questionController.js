@@ -61,14 +61,46 @@ const addQuestion = async(req, res) => {
     }
 }
 
-const getQuestion = async(req, res)=>{
+const getQuestions = async(req, res)=>{
     const clientconn = await pool.connect();
     try{
+        //Fetch all questions
+       const questionsRes = await clientconn.query(`SELECT * FROM questions`);
+       const questions = questionsRes.rows;
+
+       //Fetch all options
+       const optionsRes = await clientconn.query(`SELECT * FROM question_options`);
+       const options = optionsRes.rows;
+
+       //Fetch all tags
+       const tagsRes = await clientconn.query(`
+        SELECT qt.question_id, t.name
+        FROM question_tags qt
+        JOIN tags t ON qt.tag_id = t.id
+        `);
+
+        const tags = tagsRes.rows;
+
+        //Assemble data
+        const result = questions.map((q)=>({
+            id: q.id,
+            question_text: q.question_text,
+            options: options
+            .filter((o)=>o.question_id === q.id)
+            .map(({option_text, is_correct}) => ({option_text, is_correct})),
+            tags: tags
+            .filter((t)=> t.question_id == q.id)
+            .map((t) => t.name),
+        }));
+
+        res.status(200).json(result);
 
     }catch(error){
         console.log('Error Fetching Questions: ', error);
         res.status(500).json({error: "Internal Server Error"});
+    }finally{
+        clientconn.release();
     }
 }
 
-module.exports = {addQuestion};
+module.exports = {addQuestion, getQuestions};
