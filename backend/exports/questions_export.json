@@ -1,0 +1,28 @@
+[
+  {
+    "id": 1,
+    "question_text": "What is the capital of France?",
+    "options": [
+      {
+        "text": "Paris",
+        "is_correct": true
+      },
+      {
+        "text": "London",
+        "is_correct": false
+      },
+      {
+        "text": "Berlin",
+        "is_correct": false
+      },
+      {
+        "text": "Madrid",
+        "is_correct": false
+      }
+    ],
+    "tags": [
+      "geography",
+      "europe"
+    ]
+  }
+]

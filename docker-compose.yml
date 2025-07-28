@@ -26,6 +26,8 @@ services:
       DB_USER: aashish
       DB_PASS: supersecret
       DB_NAME: quizapp
+    volumes:
+      - ./backend/exports:/app/exports
   frontend:
     build:
       context: ./frontend
