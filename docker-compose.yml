@@ -1,4 +1,4 @@
-version: '3.8'
+version: '3.9'
 services:
   db:
     image: postgres
@@ -13,7 +13,8 @@ services:
       - pgdata:/var/lib/postgresql/data
 
   backend:
-    build: .
+    build: 
+      context: ./backend
     container_name: engineerstest-api
     ports:
       - "3000:3000"
@@ -25,6 +26,20 @@ services:
       DB_USER: aashish
       DB_PASS: supersecret
       DB_NAME: quizapp
-
+  frontend:
+    build:
+      context: ./frontend
+    container_name: engineerstest-client
+    ports:
+      - "5173:80"
+    depends_on:
+      - backend
+    stdin_open: true
+    tty: true
+    volumes:
+      - ./frontend:/app
+      - /app/node_modules
+    environment:
+      - CHOKIDAR_USEPOLLING=true
 volumes:
   pgdata:
