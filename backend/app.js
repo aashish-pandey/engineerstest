@@ -2,6 +2,7 @@ const express = require('express')
 const cors = require('cors')
 
 const questionRoutes = require('./routes/questions');
+const taggedRoutes = require('./routes/taggedQuestions');
 
 
 const app = express();
@@ -12,7 +13,8 @@ app.get("/", (req, res)=>{
     res.send("Hello World");
 });
 
-app.use('/questions', questionRoutes)
+app.use('/questions', questionRoutes);
+app.use('/api/tags', taggedRoutes);
 
 
 

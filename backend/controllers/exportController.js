@@ -26,7 +26,7 @@ const exportAsJSON = async(req, res) => {
         const optionMap = {};
         options.rows.forEach(({question_id, option_text, is_correct}) => {
             if(!optionMap[question_id])optionMap[question_id] = [];
-            optionMap[question_id].push({text: option_text, is_correct});
+            optionMap[question_id].push({option_text, is_correct});
         })
 
         const result = questions.rows.map((q)=>({

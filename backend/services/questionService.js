@@ -1,6 +1,9 @@
 const pool = require('../db/client')
 
 const addQuestionToDB = async ({ question_text, options, tags}) =>{
+    console.log(question_text);
+    console.log(options);
+    console.log(tags);
     const clientConn = await pool.connect();
     try{
 
@@ -15,21 +18,23 @@ const addQuestionToDB = async ({ question_text, options, tags}) =>{
 
         //Insert the options
         for(let option of options){
+            
             await clientConn.query(
                 `INSERT INTO question_options (question_id, option_text, is_correct) VALUES ($1, $2, $3)`,
                 [questionId, option.option_text, option.is_correct]
             );
         }
+        
 
         //INSERT tags (Create if not exists, then link)
         for(let tagName of tags){
-            let tagRes = clientConn.query(`SELECT id from tags where name = $1`, [tagName]);
-
+            let tagRes = await clientConn.query(`SELECT id from tags where name = $1`, [tagName]);
+            
             let tagId;
-
+            console.log(tagRes.rows);
             if(tagRes.rows.length === 0){
-                const insertTagRes = clientConn.query(
-                    `INSERT INTO tags (name) VALUES $1 RETURNING id`,
+                const insertTagRes = await clientConn.query(
+                    `INSERT INTO tags (name) VALUES ($1) RETURNING id`,
                     [tagName]
                 );
 

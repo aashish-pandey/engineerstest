@@ -10,7 +10,10 @@ const importQuestionsFromJSON = async(req, res) =>{
         const result = await clientConn.query('SELECT COUNT(*) FROM questions');
         const count = parseInt(result.rows[0].count, 10);
         if(count > 0){
-            return res.status(400).json({message: "Questions already exists in database, skipping import"});
+            console.log("Data exists. Clearing all related tables...");
+            await clientConn.query('BEGIN');
+            await clientConn.query(`TRUNCATE question_tags, question_options, tags, questions RESTART IDENTITY CASCADE`);
+            await clientConn.query('COMMIT');
         }
 
         const data = fs.readFileSync(path.join(__dirname, "../exports/questions_export.json"), 'utf-8');
