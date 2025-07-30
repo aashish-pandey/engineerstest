@@ -3,6 +3,8 @@ const pool = require('..//db/client');
 
 //if i have to get the dsa questions from computer science grad, i will have a tag "DSA_Computer_Science_Grad", we are not combining multiple tags
 //but making a new tag for faster aceess or easier code logic.
+//this is to get the questions 
+//pagination is implemented
 
 const getQuestionsByTag = async(req, res)=>{
     const clientConn = await pool.connect();
